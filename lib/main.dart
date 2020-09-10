@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:save_money/widget/chart.dart';
 import 'package:save_money/widget/list_transaction.dart';
 import 'package:save_money/widget/new_transaction.dart';
 
@@ -17,8 +18,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        fontFamily: 'Grandstander',
+        primarySwatch: Colors.deepOrange,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        appBarTheme: AppBarTheme(
+          textTheme: TextTheme(
+            headline6: TextStyle(
+                fontFamily: 'Grandstander', fontWeight: FontWeight.w300),
+          ),
+        ),
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -35,12 +43,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _transactions = [
-    Transaction(
-        id: '1', title: 'Mua sach', amount: 2000, dateTime: DateTime.now()),
-    Transaction(
-        id: '2', title: 'Mua sach', amount: 2000, dateTime: DateTime.now())
-  ];
+  final List<Transaction> _transactions = [];
 
   void _startAddNewTransaction(BuildContext buildContext) {
     showModalBottomSheet(
@@ -67,21 +70,15 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         actions: [
           IconButton(
-              icon: Icon(Icons.add), onPressed: () => _startAddNewTransaction(context)),
+              icon: Icon(Icons.add),
+              onPressed: () => _startAddNewTransaction(context)),
         ],
         title: Text(widget.title),
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            width: double.infinity,
-            child: Card(
-              color: Colors.blue,
-              child: Text("Chart"),
-              elevation: 5,
-            ),
-          ),
+          Chart(_transactions),
           ListTransaction(_transactions),
         ],
       ),
