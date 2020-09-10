@@ -1,12 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
+class NewTransaction extends StatefulWidget {
   final Function addNewTransaction;
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController amountController = TextEditingController();
 
   NewTransaction(this.addNewTransaction);
+
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final TextEditingController titleController = TextEditingController();
+
+  final TextEditingController amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +37,8 @@ class NewTransaction extends StatelessWidget {
             ),
             FlatButton(
               onPressed: () {
-                addNewTransaction(
-                    titleController.text, double.parse(amountController.text));
+                widget.addNewTransaction(titleController.text, double.parse(amountController.text));
+                Navigator.of(context).pop();
               },
               child: Text("Add transaction"),
               textColor: Colors.blue,

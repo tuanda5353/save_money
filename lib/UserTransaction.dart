@@ -10,12 +10,7 @@ class UserTransaction extends StatefulWidget {
 }
 
 class _UserTransactionState extends State<UserTransaction> {
-  final List<Transaction> _transactions = [
-    Transaction(
-        id: '1', title: 'Mua sach', amount: 2000, dateTime: DateTime.now()),
-    Transaction(
-        id: '2', title: 'Mua sach', amount: 2000, dateTime: DateTime.now())
-  ];
+  final List<Transaction> _transactions = [];
 
   void _startAddNewTransaction(BuildContext buildContext) {
     showModalBottomSheet(
